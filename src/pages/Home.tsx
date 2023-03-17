@@ -7,6 +7,7 @@ import {
   TextInput,
   Platform,
   FlatList,
+  Alert,
 } from 'react-native';
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
@@ -22,6 +23,11 @@ export function Home() {
   const [gretting, setGretting] = useState('');
 
   function handleAddNewSkill() {
+    const skillExists = mySkills.some(skill => skill.name === newSkil);
+    if (skillExists) {
+      Alert.alert('Essa Skill já foi adicionada');
+      return;
+    }
     const data = {
       id: String(new Date().getTime()),
       name: newSkil,
