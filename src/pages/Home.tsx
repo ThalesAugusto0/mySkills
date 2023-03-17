@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -10,13 +11,26 @@ import {
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
 
+interface SkillData {
+  id: string;
+  name: string;
+}
+
 export function Home() {
   const [newSkil, setNewSkill] = useState('');
-  const [mySkills, setMySkill] = useState([]);
+  const [mySkills, setMySkill] = useState<SkillData[]>([]);
   const [gretting, setGretting] = useState('');
 
   function handleAddNewSkill() {
-    setMySkill(oldState => [...oldState, newSkil]);
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkil,
+    };
+    setMySkill(oldState => [...oldState, data]);
+  }
+
+  function handleRemoveSkill(id: string) {
+    setMySkill(oldState => oldState.filter(skill => skill.id !== id));
   }
 
   useEffect(() => {
@@ -45,15 +59,20 @@ export function Home() {
           onChangeText={setNewSkill}
         />
 
-        <Button onPress={handleAddNewSkill} />
+        <Button onPress={handleAddNewSkill} title="Add" />
 
         <Text style={[styles.title, {marginVertical: 50}]}>My Skills</Text>
 
         <FlatList
           showsHorizontalScrollIndicator={false}
           data={mySkills}
-          keyExtractor={item => item}
-          renderItem={({item}) => <SkillCard skill={item} />}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <SkillCard
+              skill={item.name}
+              onPress={() => handleRemoveSkill(item.id)}
+            />
+          )}
         />
       </View>
     </>
@@ -64,10 +83,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121016',
-    paddingHorizontal: 20,
-    paddingVertical: 70,
-    // eslint-disable-next-line no-dupe-keys
     paddingHorizontal: 30,
+    paddingVertical: 70,
   },
   title: {
     color: '#FFF',
