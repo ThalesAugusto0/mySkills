@@ -23,3 +23,9 @@ Foi adicionado várias melhorias como, validação para não permitir cadastrar 
 - Adicionar ícone de cada skill (Se tiver ícone)
 - Criar integração com o banco de dados
 
+## ScreenShot
+<img src="https://github.com/ThalesAugusto0/mySkills/assets/19338550/4061c067-f174-42bd-905d-0531bd2550b2" width="300" height="700">
+
+<img src="https://github.com/ThalesAugusto0/mySkills/assets/19338550/9635ba51-a54b-454f-ac19-c702d0f8cbb9" width="300" height="700">
+
+<img src="https://github.com/ThalesAugusto0/mySkills/assets/19338550/c225a5a4-4e85-4257-97c9-8401bababa74" width="300" height="700">
